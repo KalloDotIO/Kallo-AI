@@ -11,7 +11,7 @@ export default function Header() {
           <div className="shrink-0 mr-4 mt-5 cursor-pointer">
             {/* Logo */}
             <a href="https://kallo.io" >
-              <Image src={logo} className='w-[45px] h-[45px]' width={45} height={45} alt='logo of kallo'/>
+              <Image src={logo} priority className='w-[45px] h-[45px]' width={45} height={45} alt='logo of kallo'/>
                     
             </a>
           </div>
