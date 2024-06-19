@@ -11,6 +11,7 @@ export default function Form({handleSubmit, loading}) {
     const [platform, setPlatform] = useState('aws')
     const data_location = fields.find(field => field.platform_value === platform)?.data_location
 
+   
 
     const firstFieldsObjects = fields.find(field => field.platform_value === platform)?.fields
     const [firstFieldsKeys, setFirstFieldKeys] = useState(...firstFieldsObjects.map(item => (
