@@ -5,6 +5,7 @@ import Link from 'next/link'
 
 export default function MobileMenu() {
   const [mobileNavOpen, setMobileNavOpen] = useState<boolean>(false)
+  
 
   const trigger = useRef<HTMLButtonElement>(null)
   const mobileNav = useRef<HTMLDivElement>(null)
@@ -70,14 +71,40 @@ export default function MobileMenu() {
               href="/signup"
               className="font-medium w-full inline-flex items-center justify-center border border-transparent px-4 py-2 my-2 rounded-sm text-white bg-purple-600 hover:bg-purple-700 transition duration-150 ease-in-out" onClick={() => setMobileNavOpen(false)}
             >
-              Sign up
+              Join Waitlist
             </Link>
           </li>
           
-          
-          <li className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>About Us</li>
+          <li className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>Home</li>
+          <li className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" >
+            <details >
+              <summary>
+              Features
+              </summary>
+              <div className="flex flex-col [&>*]:py-2 font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center">
+                <p> 
+                  Dashboards + Reporting
+                </p>
+                <p>
+                  Investigations
+                </p>
+                <p>
+                  KYC + Onboarding
+                </p>
+                <p>
+                  Decision Model
+                </p>
+                <p>
+                  ML-enabled Analytics
+                </p>
+              </div>
+              
+            </details>
+           
+          </li>
+          <li className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>About</li>
           <li className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>Blog</li>
-          <li className="flex font-medium w-full text-purple-600 hover:text-gray-200 py-2 justify-center" onClick={() => setMobileNavOpen(false)}>Documentation</li>
+          
           
         </ul>
       </nav>

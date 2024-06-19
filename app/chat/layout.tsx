@@ -1,14 +1,11 @@
 'use client'
-import Header from '@/components/ui/header'
+import Navbar from '@/components/Chat/components/Navbar'
 import { useEffect } from 'react'
 
 import AOS from 'aos'
 import 'aos/dist/aos.css'
 
-import PageIllustration from '@/components/page-illustration'
-import Footer from '@/components/ui/footer'
-
-export default function DefaultLayout({
+export default function Layout({
   children,
 }: {
   children: React.ReactNode
@@ -24,17 +21,14 @@ export default function DefaultLayout({
   })
 
   return (
-    <>
-      <Header />
-      <main className="grow">
+    <div className="flex fixed h-full w-full text-gray-600">
+      <Navbar />
 
-        <PageIllustration />
-
+      
         {children}
+     
 
-      </main>
-
-      <Footer />
-    </>
+      
+    </div>
   )
 }

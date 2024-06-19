@@ -24,8 +24,11 @@ export default function Hero() {
 
           {/* Section header */}
           <div className=" mx-auto text-center pb-12 md:pb-16">
-            <h1 className="h1 mb-12 text-3xl" data-aos="fade-up">Get insights and reports from your data with AI</h1>
-            <p className="text-lg text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">Ask any question about your data - our AI agent churns the numbers and gives you the answer</p>
+            <h1 className="h1 mb-12 text-3xl" data-aos="fade-up">Crack Down on Fraud Seamlessly</h1>
+            <p className="text-lg text-gray-400 mb-8" data-aos="fade-up" data-aos-delay="200">
+              Detect fraud with ultra-low latency at the KYC and Transaction level. 
+              Our customizable decision engine is the only tool you need
+            </p>
             <div className="max-w-xs mx-auto sm:max-w-none sm:flex sm:justify-center">
               <div data-aos="fade-up" data-aos-delay="400">
                 <a className="btn rounded-[6px] py-3 text-white text-xl bg-purple-600 hover:bg-purple-700 w-full mb-4 mt-4 sm:w-[250px] sm:mb-0" href="#0">Join Waitlist</a>
