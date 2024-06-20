@@ -1,7 +1,7 @@
 "use client"
 import { create } from 'zustand'
 
-const loggedInUser = JSON.parse(localStorage.getItem('loggedInUser'))
+const loggedInUser = null//JSON.parse(localStorage.getItem('loggedInUser'))
 
 export const useAppStore = create((set) => (
     {     

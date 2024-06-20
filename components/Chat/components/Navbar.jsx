@@ -282,9 +282,11 @@ export default function Navbar() {
                     </span>
                     <span
                         onClick={() => {
-                            localStorage.removeItem('loggedInUser');
-                            setLoggedIn(false);
-                            localStorage.removeItem('signedInBefore');
+                            if (typeof window !== 'undefined') {
+                                localStorage.removeItem('loggedInUser');
+                                setLoggedIn(false);
+                                localStorage.removeItem('signedInBefore');
+                            }
                         }}
                         className="p-3 font-medium flex items-center text-sm hover:bg-gray-300 cursor-pointer">
                         <Image className="mr-2" src={logOut} alt="icon of a log out button" />

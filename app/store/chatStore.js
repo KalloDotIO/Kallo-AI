@@ -12,7 +12,7 @@ export const useChatStore = create((set) => (
         datetime: null,
         setDatetime: (state => set({datetime: state})),
 
-        dashboardItems: {loading:false, error: false, items:   JSON.parse(localStorage.getItem('dashboardItems')) || null},
+        dashboardItems: {loading:false, error: false, items:   /*JSON.parse(localStorage.getItem('dashboardItems')) ||*/ null},
         setDashboardItems: (state => set({dashboardItems: state})),
 
         // request: '',

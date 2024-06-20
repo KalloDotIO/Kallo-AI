@@ -12,7 +12,7 @@ import SelectConfig from "@/components/Chat/components/SelectConfig"
 // import { useShallow } from 'zustand/react/shallow'
 
 export default function Chat() {
-  const signedInBefore = localStorage.getItem('signedInBefore')
+  const signedInBefore = typeof window !== 'undefined' ? localStorage.getItem('signedInBefore') : null
    const { state, setState } = useAuthenicationStore()
    const {merchant, setMerchant} = useAppStore()
  
