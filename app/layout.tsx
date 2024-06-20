@@ -16,8 +16,8 @@ const architects_daughter = Architects_Daughter({
 })
 
 export const metadata = {
-  title: 'Kallo App',
-  description: 'Modern Fraud Detection for Banking'
+  title: 'Kallo AI',
+  description: 'Kallo AI '
 }
 
 export default function RootLayout({

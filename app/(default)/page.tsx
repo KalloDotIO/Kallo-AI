@@ -1,6 +1,6 @@
 export const metadata = {
-  title: 'Home - Open PRO',
-  description: 'Page description',
+  title: 'Modern Fraud Detection for Banking',
+  description: 'Modern Fraud Detection for Banking',
 }
 
 import Hero from '@/components/hero'
