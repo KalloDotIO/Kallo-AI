@@ -124,7 +124,7 @@ export const askOpenai = async (body) => {
     try {
         const endpointResult = await window.electronAPI.showEndpoint();
         const endpoint = endpointResult.endpoint;
-        const apiKey = import.meta.env.VITE_API_KEY1;
+        const apiKey = process.env.VITE_API_KEY1;
         const token = JSON.parse(localStorage.getItem('loggedInUser'))?.token;
         const { merchant_details, configuration, prompt, message_set, datetime } = body;
         const { data_config_id, data_location, data_config } = configuration;

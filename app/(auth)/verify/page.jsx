@@ -1,7 +1,7 @@
 'use client'
 import Image from "next/image"
 import Link from "next/link"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import React from "react"
 import logo from '@/public/logo.png'
 import { useState, useEffect } from "react"
@@ -12,7 +12,7 @@ import { useAuthenicationStore } from "../../store/authenticationStore"
 
 
 function VerificationCodeInput({code, setCode, colour}) {
-    
+    const router = useRouter()
     const handleChange = (e, index) => {
       const { value } = e.target;
       if (value.length <= 1 && !isNaN(value)) {
@@ -101,7 +101,7 @@ export default function Verify({/*setState, state*/}) {
           // setState({ ...state, form: 'create' })
           useAppStore.setState({id: data.user_id, token: data.token})
           document.body.style.overflow = ''
-          redirect('/create')
+          router.push('/create')
           
 
         }

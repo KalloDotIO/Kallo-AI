@@ -3,7 +3,7 @@ import axios from "axios"
 export const chatHook = async (user_details, action) => {
      let data = null;
      let requestBody;
-     const apiKey = import.meta.env.VITE_API_KEY1;
+     const apiKey = process.env.VITE_API_KEY1;
      let apiUrl = 'https://corsproxy.io/?https://dhla1830vg.execute-api.eu-west-2.amazonaws.com/Prod/merchant';
 
      switch (action) {
@@ -25,7 +25,6 @@ export const chatHook = async (user_details, action) => {
                break;
           }
 
-     console.log(requestBody)
 
      try {
           const response = await axios.post(apiUrl, requestBody, {

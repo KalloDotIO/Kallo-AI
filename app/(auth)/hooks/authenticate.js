@@ -101,7 +101,7 @@ export const authenticate = async (user_details, action) => {
      let data = null;
      let requestBody;
      const apiKey = process.env.VITE_API_KEY1;
-    let apiUrl = 'https://corsproxy.io/?https://dhla1830vg.execute-api.eu-west-2.amazonaws.com/Prod/merchant/user';
+    let apiUrl = '/api/serverSideFetching';
 
      switch (action) {
           case 'signup':
@@ -156,7 +156,7 @@ export const authenticate = async (user_details, action) => {
           //      };
      }
 
-     console.log(requestBody)
+    
 
      try {
           const response = await axios.post(apiUrl, requestBody, {

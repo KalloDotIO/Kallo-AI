@@ -325,7 +325,7 @@ const chat_bubbles = chat.message_set.map((message, index) => {
             {!state.errorTimeout && <span className="w-[35px] h-[35px] ml-2"><img src={stop} alt="stop sign " /></span>}
           </div>
       }
-      <aside className="w-[82%] bg-[#eef0f2] relative">
+      <aside className="w-[82%] bg-[#131B22] relative">
           {/* <header className="bg-[#FFFFFF] flex items-center px-10 py-3 border-y border-[#c1c2c3]">
               <div className="bg-gray-200 h-[50px] w-[50px] rounded-full mr-4"></div>
               <p className="capitalize text-2xl font-medium">hugo</p>

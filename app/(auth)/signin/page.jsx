@@ -2,7 +2,7 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import logo from '@/public/logo.png'
 import { useState } from "react"
 import { useAppStore } from "../../store/appStore"
@@ -21,11 +21,10 @@ export default function SignIn({/*setState, state*/}) {
   })
   const [loading, setLoading] = useState(false)
   const [display, setDisplay] = useState(false)
-
+  const router = useRouter()
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    console.log('subm')
     setLoading(true)
     authenticate(form, 'signin')
     .then(data => {
@@ -34,7 +33,7 @@ export default function SignIn({/*setState, state*/}) {
         if(data.error == 'USER_NOT_VERIFIED') {
           authenticate(form, 'resend')
           setState(({...state, form:'verify', email: form.email}))
-          redirect('/verify')
+          router.push('/verify')
         }
         else {
           setState({
@@ -47,9 +46,9 @@ export default function SignIn({/*setState, state*/}) {
         
       }
       if(data.success) {
-        
+        console.log(data)
         //useAppStore.setState({id: data.user_id, token: data.token, loggedIn: true})
-        document.body.style.overflow = ''
+        document.body.style.overflow = '';
         chatHook(null, 'get_merchant')
         .then(data2 => {
           console.log(data2)
@@ -66,6 +65,7 @@ export default function SignIn({/*setState, state*/}) {
           console.log(e)
   
         })
+        router.push('/chat');
         
       }
     })

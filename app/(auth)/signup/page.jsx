@@ -2,7 +2,7 @@
 import React from "react"
 import Image from "next/image"
 import Link from "next/link"
-import { redirect } from "next/navigation"
+import { useRouter } from "next/navigation"
 import logo from '@/public/logo.png'
 import { useState } from "react"
 import { useAuthenicationStore } from "../../store/authenticationStore"
@@ -12,6 +12,7 @@ import eyeOff from '@/public/assets/authentication/eyeOff.svg'
 
 
 export default function SignUp({/*setState, state*/}) {
+  const router = useRouter()
   const { state, setState } = useAuthenicationStore()
   const [form, setForm] = useState({
       "first_name": "",
@@ -50,7 +51,7 @@ export default function SignUp({/*setState, state*/}) {
             form: 'verify',
             email: form.email 
           })
-           redirect('/verify')
+           router.push('/verify')
         })
         .catch(e => {
           console.log(e)

@@ -1,13 +1,13 @@
 import React, { useEffect, useState, useRef } from 'react';
 import dashboardImage from '@/public/assets/chat/dashboard.svg';
-import newchat from '@/public/assets/chat/newchat.svg';
+import rules from '@/public/assets/chat/rules.svg';
 import reports from '@/public/assets/chat/settings/data.svg';
 import settings from '@/public/assets/chat/settings.svg';
-import discussions from '@/public/assets/chat/discussions.svg';
 import chevron from '@/public/assets/chat/chevron.svg';
-import logOut from '@/public/assets/chat/logOut.svg';
-import logo from '@/public/logo.png';
-import connections from '@/public/assets/chat/connections.svg';
+import database from '@/public/assets/chat/database.svg';
+import cm from '@/public/assets/chat/cm.svg';
+import sa from '@/public/assets/chat/sa.svg';
+import simulations from '@/public/assets/chat/simulations.svg';
 import { getChatHistory, deleteChat } from "../hooks/chatHook";
 import { useAppStore } from "../../../app/store/appStore"
 import { categorizeDate } from "../hooks/date"
@@ -29,11 +29,8 @@ export default function Navbar() {
     const [navSettings, setNavSettings] = useState({hoverItem: '', tab: false})
     const  node = deleteTab(() => setNavSettings(prev => ({...prev, tab: false})))
     
-    const { chat, /*setChat, setDatetime, setDashboardItems,*/ dashboardItems } = useChatStore(useShallow(state => ({
+    const { chat, dashboardItems } = useChatStore(useShallow(state => ({
         chat: state.chat,
-        // setChat: state.setChat,
-        // setDatetime: state.setDatetime,
-        // setDashboardItems: state.setDashboardItems,
         dashboardItems: state.dashboardItems,
       })));
     
@@ -49,15 +46,11 @@ export default function Navbar() {
         component: ''
     });
 
-    // const chatsArray = Array.from({ length: 30 }).map((_, index) => (
-    //     <div key={index}>Item {index + 1}</div>
-    // ));
 
     useEffect(() => {
         console.log('navbar mounted')
     }, [])
 
-    //fetching dashboardItems
 
     useEffect(() => {
     if(merchant && configs && !dashboardItems.items) {
@@ -70,10 +63,9 @@ export default function Navbar() {
             configs 
           }, true)
           .then(result =>  {
-            //console.log(result)
+            
             setDashboardItems({...dashboardItems, items: result, loading: false})
-        //localStorage.setItem('dashboardItems', JSON.stringify(result))
-            //localStorage.removeItem('dashboardItems')
+        
           })
           .catch(e => {
             console.log(e)
@@ -95,11 +87,10 @@ export default function Navbar() {
         }
         getChatHistory(merchant_details)
         .then(result => {
-            //console.log(result?.list_of_chat_histories.reverse())
+            
             if(result.success) {
                 setChatHistory(prev => ({...prev, error: false, items:result.list_of_chat_histories.reverse(),  loading:false}))
-                //localStorage.setItem('chathistory', JSON.stringify(result?.list_of_chat_histories.reverse()))
-                //localStorage.removeItem('chatHistory')
+                
                 console.log(result)
             }
             
@@ -121,10 +112,7 @@ export default function Navbar() {
         
     }, [merchant]);
 
-    // useEffect(() => {
-    //     console.log(chat)
-        
-    // }, [chat]);
+    
 
     useEffect(() => {
         console.log(configs)
@@ -221,77 +209,50 @@ export default function Navbar() {
                     />
             )}
             
-            <nav className="w-[300px] bg-[#eef0f2] border-r border-[#c1c2c3] relative">
-                <div className="py-4 px-3 font-medium bg-[#ffffff] text-xl border-b border-[#c1c2c3] flex justify-between items-center">
-                    Discussions
-                    <Image className="w-[35px] h-[35px] " width={35} height={35} src={discussions} alt="icon of chat bubbles" />
-                </div>
-                <Link href='/' onClick={() => {setChat({create_datetime: new Date(), message_set: []}), setConfigId(null), setActiveTab('newchat')}} className={`hover:bg-gray-300 p-3.5 font-medium border-b border-[#c1c2c3] text-sm cursor-pointer flex justify-between items-center ${activeTab == 'newchat' && 'bg-gray-300'}`}>
-                    <div className="flex items-center">
-                        <span href="https://kallo.io" className="cursor-pointer pr-3 relative ">
-                            <Image src={logo} className='w-[20px] h-[20px]' alt='logo of kallo'/>
-                                    
-                        </span>
-                        New Chat
-                    </div>
-                    <Image className="w-[15px] h-[15px] " src={newchat} alt="icon of a pen on paper" />
+            <nav className="w-[250px] pt-2 bg-[#131B22] border-r border-gray-700 relative text-white">
+                
+                <Link href='/' onClick={() => { setChat({create_datetime: new Date(), message_set: []}), setActiveTab('dashboard')}} className={`hover:bg-gray-700 list-none p-3.5 font-medium text-sm cursor-pointer flex items-center ${activeTab == 'dashboard' && 'bg-gray-300'}`}>
+                <Image className="w-[22px] h-[22px] mr-3.5"  width={22} height={22} src={dashboardImage} alt="icon of a dashboard" />
+                        Dashboard
+                        
                 </Link>
                 
-                <details>
-                    <summary className="hover:bg-gray-300 list-none p-3.5 font-medium border-b border-[#c1c2c3] text-sm cursor-pointer flex justify-between items-center">
-                        Chat History
-                        <Image className="w-[11px] h-[11px] " src={chevron} alt="icon of an arror" />
-                    </summary>
-                    <div className="border-b border-[#c1c2c3] pt-[0.3rem] pl-3 w-full overflow-x-hidden max-h-[226px] overflow-y-hidden hover:overflow-y-scroll pb-[15px]">
-                        {
-                        // chatHistory[0]?.message_set ? chatsArray : <div className="loader mx-auto py-4"></div>
-                        chatHistory.loading?
-                        <div className="loader mx-auto py-4"></div> :
-                        chatHistory.error ?
-                        <div className="mx-auto py-4 text-xs "> Error while fetching chat history. <span onClick={getChat}  className="cursor-pointer text-[#2886FF]">Try again</span></div> :
-                        chatHistory.items?.length > 0 ? chatsArray : <p className="text-xs py-2">No chats yet, click on New chat to star a chat</p>
-
-                        }
-                    </div>
-                </details>
-                <Link href='/' onClick={() => { setChat({create_datetime: new Date(), message_set: []}), setActiveTab('dashboard')}} className={`hover:bg-gray-300 list-none p-3.5 font-medium border-b border-[#c1c2c3] text-sm cursor-pointer flex justify-between items-center ${activeTab == 'dashboard' && 'bg-gray-300'}`}>
-                        Dashboard
-                        <Image className="w-[22px] h-[22px] "  width={22} height={22} src={dashboardImage} alt="icon of a dashboard" />
+                <Link href='/' onClick={() => { setChat({create_datetime: new Date(), message_set: []}), setActiveTab('dashboard')}} className={`hover:bg-gray-700 list-none p-3.5 font-medium text-sm cursor-pointer flex items-center ${activeTab == 'dashboard' && 'bg-gray-300'}`}>
+                    <Image className="w-[22px] h-[22px] mr-3.5"  width={22} height={22} src={rules} alt="icon of a dashboard" />
+                    Rules
+                    
                 </Link>
-                <Link href='/' onClick={() => { setChat({create_datetime: new Date(), message_set: []}), setActiveTab('reports')}} className={`hover:bg-gray-300 list-none p-3.5 font-medium border-b border-[#c1c2c3] text-sm cursor-pointer flex justify-between items-center ${activeTab == 'reports' && 'bg-gray-300'}`}>
-                        Scheduled Reports
-                        <Image className="w-[22px] h-[22px] "  width={22} height={22} src={reports} alt="icon of a pen on paper" />
+
+                <Link href='/' onClick={() => { setChat({create_datetime: new Date(), message_set: []}), setActiveTab('dashboard')}} className={`hover:bg-gray-700 list-none p-3.5 font-medium text-sm cursor-pointer flex items-center ${activeTab == 'dashboard' && 'bg-gray-300'}`}>
+                    <Image className="w-[22px] h-[22px] mr-3.5"  width={22} height={22} src={simulations} alt="icon of a dashboard" />
+                        Simulations
+                        
+                </Link>
+                <Link href='/' onClick={() => { setChat({create_datetime: new Date(), message_set: []}), setActiveTab('reports')}} className={`hover:bg-gray-700 list-none p-3.5 font-medium text-sm cursor-pointer flex items-center ${activeTab == 'reports' && 'bg-gray-300'}`}>
+                    <Image className="w-[22px] h-[22px] mr-3.5"  width={22} height={22} src={database} alt="icon of a pen on paper" />
+                        Database
+                        
                 </Link>
                     
+                <Link href='/' onClick={() => { setChat({create_datetime: new Date(), message_set: []}), setActiveTab('dashboard')}} className={`hover:bg-gray-700 list-none p-3.5 font-medium text-sm cursor-pointer flex items-center ${activeTab == 'dashboard' && 'bg-gray-300'}`}>
+                    <Image className="w-[22px] h-[22px] mr-3.5"  width={22} height={22} src={cm} alt="icon of a dashboard" />
+                        Case Manager
+                        
+                </Link>
+
+
+                <Link href='/' onClick={() => { setChat({create_datetime: new Date(), message_set: []}), setActiveTab('dashboard')}} className={`hover:bg-gray-700 list-none p-3.5 font-medium text-sm cursor-pointer flex items-center ${activeTab == 'dashboard' && 'bg-gray-300'}`}>
+                    <Image className="w-[22px] h-[22px] mr-3.5"  width={22} height={22} src={sa} alt="icon of a dashboard" />
+                        Settlement Accounts
+                        
+                </Link>
                 
-                {/* <div className="p-3 font-medium border-b border-[#c1c2c3] text-sm cursor-pointer">Dashboard</div>
-                <div className="p-3 font-medium border-b border-[#c1c2c3] text-sm cursor-pointer">Scheduled Reports</div> */}
-                
-                
-                <div className="absolute bottom-0 flex flex-col py-3 border-t border-[#c1c2c3] w-full bg-[#eef0f2]">
-                    <span className="p-3 pb-2 font-medium flex items-center text-sm">
-                        <Image className="mr-2 w-[25px] h-[25px]"  width={25} height={25} src={connections} alt="icon of a wifi signal" />
-                        Connections
-                    </span>
-                    <span onClick={openConfigurationPopup} className="cursor-pointer mb-2 pl-10 font-normal flex items-center text-xs text-[#2886FF]">
-                        Add Connection
-                    </span>
-                    <span onClick={openSettingsPopup} className="p-3 font-medium flex items-center text-sm hover:bg-gray-300 cursor-pointer">
-                        <Image className="mr-2" src={settings} alt="icon of a screw" />
+                <div className="absolute bottom-0 flex flex-col items-center py-3 w-full bg-[#131B22]">
+                    
+                    <span onClick={openSettingsPopup} className="p-3 font-medium flex items-center text-sm hover:bg-gray-700 cursor-pointer text-black">
                         Settings
                     </span>
-                    <span
-                        onClick={() => {
-                            if (typeof window !== 'undefined') {
-                                localStorage.removeItem('loggedInUser');
-                                setLoggedIn(false);
-                                localStorage.removeItem('signedInBefore');
-                            }
-                        }}
-                        className="p-3 font-medium flex items-center text-sm hover:bg-gray-300 cursor-pointer">
-                        <Image className="mr-2" src={logOut} alt="icon of a log out button" />
-                        Log out
-                    </span>
+                    
                 </div>
             </nav>
         </>
